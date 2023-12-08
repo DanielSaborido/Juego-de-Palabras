@@ -19,23 +19,17 @@ public class EquipoServiceImpl{
         return equipoRepository.findAll();
     }
 
-
     public Optional<Equipo> findById(Long id) {
         return equipoRepository.findById(id);
     }
 
-
     public Equipo save(Equipo equipo) {
-        equipo.setFechaCreacion(LocalDateTime.now());
-        equipo.setFechaModificacion(LocalDateTime.now());
         return equipoRepository.save(equipo);
     }
-
 
     public void deleteById(Long id) {
         equipoRepository.deleteById(id);
     }
-
 
     public boolean existsById(Long id) {
         return equipoRepository.existsById(id);

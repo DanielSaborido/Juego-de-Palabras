@@ -2,6 +2,7 @@ package com.example.juegopalabras.controller;
 
 import com.example.juegopalabras.error.JuegoNotFoundException;
 import com.example.juegopalabras.modelo.Juego;
+import com.example.juegopalabras.modelo.Jugador;
 import com.example.juegopalabras.service.JuegoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +36,10 @@ public class JuegoController {
     @PutMapping("/juego/{id}")
     public Juego updateJuego(@RequestBody Juego updateJuego, @PathVariable Long id){
         if (juegoService.existsById(id)) {
-            updateJuego.setId(id);
-            updateJuego.setFechaModificacion(LocalDateTime.now());
+            Juego juego = juegoService.findById(id).get();
+            juego.setDificultadjuego(updateJuego.getDificultadjuego());
+            juego.setDescripcion(updateJuego.getDescripcion());
+            juego.setIntentosDificultad(updateJuego.getIntentosDificultad());
             return juegoService.save(updateJuego);
         } else {
             throw new JuegoNotFoundException(id);

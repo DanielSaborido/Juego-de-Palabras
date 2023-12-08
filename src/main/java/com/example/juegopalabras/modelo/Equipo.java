@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Entity
 public class Equipo {
@@ -13,4 +14,7 @@ public class Equipo {
     private String name;
     private String emblema;
     private Integer puntuacion;
+
+    @OneToMany(mappedBy = "equipo", cascade = CascadeType.ALL)
+    private List<Jugador> jugadores;
 }

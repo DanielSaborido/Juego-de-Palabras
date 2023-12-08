@@ -54,7 +54,10 @@ public class EquipoController {
     public Equipo updateEquipo(@RequestBody Equipo updateEquipo, @PathVariable Long id){
         if (equipoService.existsById(id)) {
             updateEquipo.setId(id);
-            updateEquipo.setFechaModificacion(LocalDateTime.now());
+            Equipo equipo = equipoService.findById(id).get();
+            equipo.setName(updateEquipo.getName());
+            equipo.setEmblema(updateEquipo.getEmblema());
+            equipo.setPuntuacion(updateEquipo.getPuntuacion());
             return equipoService.save(updateEquipo);
         } else {
             throw new EquipoNotFoundException(id);

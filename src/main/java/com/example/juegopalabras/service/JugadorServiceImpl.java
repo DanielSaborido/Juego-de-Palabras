@@ -26,9 +26,6 @@ public class JugadorServiceImpl implements JugadorService {
 
     @Override
     public Jugador save(Jugador jugador) {
-        jugador.setFechaCreacion(LocalDateTime.now());
-        jugador.setFechaModificacion(LocalDateTime.now());
-        jugador.setRol("user");
         return jugadorRepository.save(jugador);
     }
 

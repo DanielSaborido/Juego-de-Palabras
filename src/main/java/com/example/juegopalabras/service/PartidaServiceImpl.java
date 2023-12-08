@@ -33,7 +33,6 @@ public class PartidaServiceImpl implements PartidaService{
 
     @Override
     public Partida save(Partida partida) {
-        partida.setFecha(LocalDateTime.now());
         return partidaRepository.save(partida);
     }
 
@@ -58,7 +57,7 @@ public class PartidaServiceImpl implements PartidaService{
         }
         int totalPuntos = 0;
         for (Partida partida : partidas) {
-            totalPuntos += partida.getPuntos();
+            totalPuntos += partida.getPuntuacion();
         }
         return totalPuntos;
     }

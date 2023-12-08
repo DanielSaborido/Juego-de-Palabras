@@ -25,8 +25,6 @@ public class JuegoServiceImpl implements JuegoService {
 
     @Override
     public Juego save(Juego juego) {
-        juego.setFechaCreacion(LocalDateTime.now());
-        juego.setFechaModificacion(LocalDateTime.now());
         return juegoRepository.save(juego);
     }
 

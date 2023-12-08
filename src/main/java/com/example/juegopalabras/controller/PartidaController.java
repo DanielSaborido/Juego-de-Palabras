@@ -40,16 +40,18 @@ public class PartidaController {
 
     @PutMapping("/partida/{id}")
     public Partida updatePartida(@RequestBody Partida partidaUpdate, @PathVariable Long id) {
-        if(partidaService.existsById(id)){
-            Partida partida = partidaService.findById(id).get();
+        if (partidaService.existsById(id)) {
+            Partida partida = partidaService.findById(id).orElseThrow(() -> new PartidaNotFoundException(id));
+            partida.setStartTime(partidaUpdate.getStartTime());
+            partida.setEndTime(partidaUpdate.getEndTime());
             partida.setIntentos(partidaUpdate.getIntentos());
-            partida.setPalabra(partidaUpdate.getPalabra());
-            partida.setPuntos(partidaUpdate.getPuntos());
-            return partidaService.save(partidaUpdate);
-        }else{
+            partida.setPalabraRonda(partidaUpdate.getPalabraRonda());
+            partida.setPuntuacion(partidaUpdate.getPuntuacion());
+
+            return partidaService.save(partida);
+        } else {
             throw new PartidaNotFoundException(id);
         }
-
     }
 
     @DeleteMapping("partida/{id}")

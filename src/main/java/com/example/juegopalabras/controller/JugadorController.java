@@ -38,13 +38,10 @@ public class JugadorController {
     public Jugador updateJugador(@RequestBody Jugador updateJugador, @PathVariable Long id){
         if(jugadorService.existsById(id)){
             Jugador jugador = jugadorService.findById(id).get();
-            jugador.setNombre(updateJugador.getNombre());
-            jugador.setClave(updateJugador.getClave());
+            jugador.setUser(updateJugador.getUser());
+            jugador.setScore(updateJugador.getScore());
             jugador.setAvatar(updateJugador.getAvatar());
-            jugador.setCorreo(updateJugador.getCorreo());
-            jugador.setRol(updateJugador.getRol());
             jugador.setEquipo(updateJugador.getEquipo());
-            jugador.setFechaModificacion(LocalDateTime.now());
             return jugadorService.save(jugador);
         } else {
             throw new JugadorNotFoundException(id);
